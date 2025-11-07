@@ -1,0 +1,403 @@
+================================================================================
+        HƯỚNG DẪN SỬ DỤNG - DỰ BÁO CHẤT LƯỢNG KHÔNG KHÍ TP.HCM 2025
+================================================================================
+
+📌 MÔ TẢ DỰ ÁN
+--------------------------------------------------------------------------------
+Dự án nghiên cứu và dự báo chất lượng không khí Thành phố Hồ Chí Minh năm 
+2025 sử dụng Machine Learning và phân tích chuỗi thời gian.
+
+Dữ liệu: 52,548 measurements từ 6 trạm quan trắc (23/02/2021 - 21/06/2022)
+Các chỉ số: PM2.5, TSP, SO₂, NO₂, CO, O₃, Temperature, Humidity
+
+
+================================================================================
+                            HƯỚNG DẪN CÀI ĐẶT
+================================================================================
+
+BƯỚC 1: KIỂM TRA YÊU CẦU HỆ THỐNG
+--------------------------------------------------------------------------------
+Yêu cầu:
+  • Python 3.8 trở lên
+  • pip (Python package manager)
+  • 2GB RAM trống
+  • 500MB dung lượng ổ cứng
+
+Kiểm tra Python version:
+  $ python --version
+  hoặc
+  $ python3 --version
+
+
+BƯỚC 2: TẢI PROJECT
+--------------------------------------------------------------------------------
+Clone repository (nếu có Git):
+  $ git clone [repository-url]
+  $ cd 2025-hcmut-khaiphadulieu-btl
+
+Hoặc giải nén file zip đã tải về:
+  $ unzip project.zip
+  $ cd 2025-hcmut-khaiphadulieu-btl
+
+
+BƯỚC 3: TẠO MÔI TRƯỜNG ẢO (VIRTUAL ENVIRONMENT)
+--------------------------------------------------------------------------------
+Tạo virtual environment:
+  $ python -m venv myenv
+
+Kích hoạt môi trường ảo:
+  
+  • Trên macOS/Linux:
+    $ source myenv/bin/activate
+  
+  • Trên Windows:
+    $ myenv\Scripts\activate
+
+Lưu ý: Dấu nhắc terminal sẽ thay đổi thành (myenv) khi kích hoạt thành công
+
+
+BƯỚC 4: CÀI ĐẶT THỨ VIỆN
+--------------------------------------------------------------------------------
+Cập nhật pip:
+  $ pip install --upgrade pip
+
+Cài đặt các thư viện cần thiết:
+  $ pip install pandas numpy matplotlib seaborn scikit-learn scipy statsmodels
+
+Hoặc sử dụng file requirements.txt (nếu có):
+  $ pip install -r requirements.txt
+
+
+BƯỚC 5: KIỂM TRA DỮ LIỆU
+--------------------------------------------------------------------------------
+Đảm bảo file dữ liệu có trong thư mục gốc:
+  • HealthyAir_HCMC.csv (hoặc HealthyAir_HCMC_cleaned.csv)
+
+Kiểm tra:
+  $ ls -la *.csv
+
+
+================================================================================
+                            CÁCH CHẠY DỰ ÁN
+================================================================================
+
+CHẠY PHÂN TÍCH EDA (Exploratory Data Analysis)
+--------------------------------------------------------------------------------
+1. Kích hoạt virtual environment:
+   $ source myenv/bin/activate    # macOS/Linux
+   $ myenv\Scripts\activate       # Windows
+
+2. Chạy file phân tích:
+   $ python eda_target_creation.py
+
+3. Chờ chương trình chạy (khoảng 1-2 phút)
+
+4. Kiểm tra kết quả:
+   - Terminal: Hiển thị thống kê và insights
+   - File: eda_analysis.png (9 biểu đồ phân tích)
+   - File: cleaned_data.csv (dữ liệu đã làm sạch)
+
+
+CHẠY MÔ HÌNH MACHINE LEARNING
+--------------------------------------------------------------------------------
+1. Kích hoạt virtual environment (nếu chưa):
+   $ source myenv/bin/activate
+
+2. Chạy file mô hình:
+   $ python ml_models.py
+
+3. Xem kết quả dự đoán PM2.5
+
+
+CHẠY DỰ BÁO 2025
+--------------------------------------------------------------------------------
+1. Kích hoạt virtual environment:
+   $ source myenv/bin/activate
+
+2. Chạy file dự báo:
+   $ python forecast_2025_corrected.py
+
+3. Kiểm tra file output:
+   - forecast_2025.csv (dự báo PM2.5 cho 12 tháng năm 2025)
+
+
+CHẠY DASHBOARD TỔNG HỢP
+--------------------------------------------------------------------------------
+1. Kích hoạt virtual environment:
+   $ source myenv/bin/activate
+
+2. Chạy dashboard:
+   $ python dashboard_comprehensive.py
+
+3. Xem 15 biểu đồ phân tích tổng hợp
+
+
+TẮT MÔI TRƯỜNG ẢO
+--------------------------------------------------------------------------------
+Khi hoàn thành công việc:
+  $ deactivate
+
+
+================================================================================
+                        KẾT QUẢ MONG ĐỢI
+================================================================================
+
+SAU KHI CHẠY EDA_TARGET_CREATION.PY
+--------------------------------------------------------------------------------
+Terminal output:
+  • Số lượng dữ liệu: 52,548 dòng, 17 cột
+  • Phân bố AQI Level:
+    - Moderate: 66.5%
+    - Good: 22.2%
+    - Unhealthy: 8.7%
+    - Hazardous: 2.6%
+  • Phân tích 6 stations (đại diện các khu vực TP.HCM)
+
+Files được tạo:
+  • eda_analysis.png - 9 biểu đồ phân tích chi tiết
+  • cleaned_data.csv - Dữ liệu đã làm sạch và thêm AQI Level
+
+
+9 BIỂU ĐỒ PHÂN TÍCH (eda_analysis.png)
+--------------------------------------------------------------------------------
+1. Phân bố PM2.5 theo Station
+2. Phân bố AQI Level (4 categories)
+3. Xu hướng PM2.5 theo thời gian
+4. Ma trận tương quan giữa các chỉ số
+5. Mối quan hệ Nhiệt độ vs PM2.5
+6. PM2.5 theo giờ trong ngày (hourly pattern)
+7. PM2.5 theo tháng (seasonal pattern)
+8. So sánh PM2.5 giữa các Station
+9. Phân bố AQI Level theo Station
+
+
+INSIGHTS CHÍNH
+--------------------------------------------------------------------------------
+• Station 4 (Quận 3) ô nhiễm nhất: 26.5 μg/m³
+• Station 5 (Bình Thạnh) sạch nhất: 15.1 μg/m³
+• Mùa khô (Dec-Feb) ô nhiễm cao hơn mùa mưa (Jun-Sep)
+• TSP có tương quan mạnh nhất với PM2.5
+• PM2.5 dự báo 2025: 21.3 μg/m³ (Moderate level)
+
+
+================================================================================
+                        CẤU TRÚC PROJECT
+================================================================================
+
+2025-hcmut-khaiphadulieu-btl/
+├── README.md                           # Hướng dẫn chi tiết
+├── userguide.txt                       # File này (hướng dẫn nhanh)
+│
+├── HealthyAir_HCMC_cleaned.csv        # Dataset chính
+├── cleaned_data.csv                    # Dữ liệu đã xử lý
+│
+├── data_cleaning.py                    # Làm sạch dữ liệu
+├── explore_data.py                     # Khám phá dữ liệu
+├── eda_target_creation.py             # Phân tích EDA + tạo target
+├── ml_models.py                        # Mô hình Machine Learning
+├── forecast_2025_corrected.py         # Dự báo 2025
+├── health_impact_analysis.py          # Phân tích tác động sức khỏe
+├── dashboard_comprehensive.py         # Dashboard tổng hợp
+├── scientific_report.py               # Tạo báo cáo khoa học
+│
+├── forecast_2025.csv                  # Kết quả dự báo (output)
+├── scientific_report.txt              # Báo cáo khoa học (output)
+│
+├── myenv/                             # Virtual environment
+│   ├── bin/activate                   # Script kích hoạt (macOS/Linux)
+│   ├── Scripts/activate.bat           # Script kích hoạt (Windows)
+│   └── lib/python3.x/site-packages/   # Thư viện đã cài
+│
+└── requirements.txt                   # Danh sách dependencies
+
+
+================================================================================
+                    KHẮC PHỤC SỰ CỐ (TROUBLESHOOTING)
+================================================================================
+
+LỖI: Python không được tìm thấy
+--------------------------------------------------------------------------------
+Giải pháp:
+  • Cài Python từ: https://python.org
+  • macOS: brew install python
+  • Ubuntu: sudo apt install python3 python3-pip
+
+
+LỖI: Pip không hoạt động
+--------------------------------------------------------------------------------
+Giải pháp:
+  $ python -m ensurepip --upgrade
+  
+  Hoặc cài manual:
+  $ curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+  $ python get-pip.py
+
+
+LỖI: Import thư viện thất bại
+--------------------------------------------------------------------------------
+Giải pháp:
+  1. Đảm bảo virtual environment được kích hoạt:
+     $ source myenv/bin/activate
+  
+  2. Cài lại packages:
+     $ pip install --force-reinstall pandas numpy matplotlib seaborn scikit-learn
+
+
+LỖI: File dữ liệu không tìm thấy
+--------------------------------------------------------------------------------
+Giải pháp:
+  1. Kiểm tra file có trong thư mục gốc:
+     $ ls -la HealthyAir_HCMC*.csv
+  
+  2. Đảm bảo đang ở đúng thư mục project:
+     $ pwd
+     $ cd /path/to/2025-hcmut-khaiphadulieu-btl
+
+
+LỖI: Biểu đồ không hiển thị
+--------------------------------------------------------------------------------
+Giải pháp:
+  Cài backend cho matplotlib:
+  $ pip install PyQt5
+  
+  Hoặc:
+  $ pip install tkinter
+
+
+LỖI: Virtual environment không kích hoạt được
+--------------------------------------------------------------------------------
+Giải pháp:
+  • macOS/Linux: Kiểm tra quyền thực thi:
+    $ chmod +x myenv/bin/activate
+    $ source myenv/bin/activate
+  
+  • Windows: Cho phép chạy scripts:
+    $ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+    $ myenv\Scripts\activate
+
+
+================================================================================
+                        DANH SÁCH THƯ VIỆN
+================================================================================
+
+Các thư viện chính:
+  • pandas==2.3.3           - Xử lý dữ liệu
+  • numpy==2.3.3            - Tính toán số học
+  • matplotlib==3.10.6      - Vẽ biểu đồ
+  • seaborn==0.13.2         - Visualization nâng cao
+  • scikit-learn==1.7.2     - Machine Learning
+  • scipy==1.16.2           - Tính toán khoa học
+  • statsmodels==0.14.5     - Time series analysis
+
+
+================================================================================
+                        TÍNH NĂNG CHỦ YẾU
+================================================================================
+
+TASK 2: Target Variable Creation
+--------------------------------------------------------------------------------
+• Tạo AQI Level từ PM2.5 (theo chuẩn WHO)
+• 4 categories: Good / Moderate / Unhealthy / Hazardous
+• Phân tích phân bố: 66.5% Moderate, 22.2% Good
+
+TASK 3: Exploratory Data Analysis
+--------------------------------------------------------------------------------
+• 9 visualizations chuyên sâu
+• Phân tích theo 6 stations (đại diện các khu vực TP.HCM)
+• Seasonal patterns và hourly patterns
+• Correlation analysis giữa các pollutants
+
+TASK 4: Machine Learning Models
+--------------------------------------------------------------------------------
+• Random Forest Regression
+• Linear Regression
+• Đánh giá model với R², MAE, RMSE
+
+TASK 5: Time Series Forecasting
+--------------------------------------------------------------------------------
+• Dự báo PM2.5 cho 12 tháng năm 2025
+• Sử dụng exponential smoothing
+• Output: forecast_2025.csv
+
+TASK 6: Health Impact Assessment
+--------------------------------------------------------------------------------
+• Phân tích tác động sức khỏe
+• So sánh với tiêu chuẩn WHO và Việt Nam
+• Khuyến nghị cải thiện chất lượng không khí
+
+
+================================================================================
+                        KẾT QUẢ DỰ KIẾN
+================================================================================
+
+PM2.5 DỰ BÁO 2025: 21.3 μg/m³ (Moderate level)
+--------------------------------------------------------------------------------
+✅ Đạt tiêu chuẩn Việt Nam (< 25 μg/m³)
+❌ Chưa đạt tiêu chuẩn WHO (< 5 μg/m³)
+⚠️  Cần cải thiện để bảo vệ sức khỏe cộng đồng
+
+
+6 TRẠM QUAN TRẮC
+--------------------------------------------------------------------------------
+Station 1: Khu vực trung tâm
+Station 2: Khu dân cư
+Station 3: Khu công nghiệp
+Station 4: Quận 3 (ô nhiễm nhất - 26.5 μg/m³)
+Station 5: Bình Thạnh (sạch nhất - 15.1 μg/m³)
+Station 6: Khu ven
+
+
+================================================================================
+                        CHECKLIST HOÀN THÀNH
+================================================================================
+
+□ Python 3.8+ đã cài đặt
+□ Virtual environment đã tạo
+□ Dependencies đã cài đặt đầy đủ
+□ File dữ liệu có trong thư mục
+□ Virtual environment đã kích hoạt
+□ Chạy eda_target_creation.py thành công
+□ File eda_analysis.png được tạo
+□ File cleaned_data.csv được tạo
+□ Chạy ml_models.py (nếu cần)
+□ Chạy forecast_2025_corrected.py (nếu cần)
+□ Kiểm tra file forecast_2025.csv
+□ Tắt virtual environment khi hoàn thành
+
+
+================================================================================
+                        LƯU Ý QUAN TRỌNG
+================================================================================
+
+1. LUÔN LUÔN kích hoạt virtual environment trước khi chạy:
+   $ source myenv/bin/activate    # macOS/Linux
+   $ myenv\Scripts\activate       # Windows
+
+2. Đảm bảo đang ở đúng thư mục project khi chạy lệnh:
+   $ pwd
+   $ cd /path/to/2025-hcmut-khaiphadulieu-btl
+
+3. Kiểm tra Python version trước khi bắt đầu:
+   $ python --version
+   (Yêu cầu >= 3.8)
+
+4. Nếu gặp lỗi, đọc kỹ phần TROUBLESHOOTING ở trên
+
+5. Tất cả file .py phải chạy từ thư mục gốc của project
+
+
+================================================================================
+                        LIÊN HỆ & HỖ TRỢ
+================================================================================
+
+Nếu gặp vấn đề:
+1. ✓ Kiểm tra lại từng bước cài đặt
+2. ✓ Đảm bảo Python version 3.8+
+3. ✓ Kích hoạt virtual environment trước khi chạy
+4. ✓ Kiểm tra file dữ liệu có đúng vị trí
+5. ✓ Xem lại phần Troubleshooting
+
+
+================================================================================
+                        KẾT THÚC
+================================================================================
