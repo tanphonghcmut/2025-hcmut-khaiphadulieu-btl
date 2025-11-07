@@ -9,11 +9,11 @@ warnings.filterwarnings('ignore')
 
 print("=== PHÂN TÍCH TÁC ĐỘNG SỨC KHỎE VÀ ĐỀ XUẤT CHÍNH SÁCH ===")
 
-# 1. Load dữ liệu và setup
+
 df = pd.read_csv("HealthyAir_HCMC.csv")
 df['datetime'] = pd.to_datetime(df['date'], format='%d-%m-%Y %H:%M')
 
-# Health impact functions với tiếng Việt
+
 def get_aqi_level(pm25):
     if pm25 <= 12: return "Tốt"
     elif pm25 <= 35.4: return "Trung bình"
@@ -26,21 +26,20 @@ def get_health_risk(pm25):
     elif pm25 <= 55.4: return "Rủi ro cao"
     else: return "Rủi ro rất cao"
 
-# Tạo health analysis với tiếng Việt
+
 df['AQI_Level'] = df['PM2.5'].apply(get_aqi_level)
 df['Health_Risk'] = df['PM2.5'].apply(get_health_risk)
 
-# Dự báo 2025
+
 forecast_2025 = {
     1: 30.3, 2: 19.1, 3: 22.1, 4: 22.6, 5: 18.2, 6: 19.1,
     7: 15.2, 8: 15.3, 9: 13.9, 10: 24.3, 11: 25.6, 12: 28.1
 }
 
-# Health Visualization với text tiếng Việt
 fig, axes = plt.subplots(2, 3, figsize=(18, 12))
 fig.suptitle('PHÂN TÍCH TÁC ĐỘNG SỨC KHỎE - CHẤT LƯỢNG KHÔNG KHÍ TP.HCM', fontsize=16, fontweight='bold')
 
-# Plot 1: Rủi ro sức khỏe theo trạm
+
 ax1 = axes[0, 0]
 station_pm25 = df.groupby('Station_No')['PM2.5'].mean()
 station_info = {
@@ -57,18 +56,17 @@ ax1.set_xticks(range(len(station_pm25)))
 ax1.set_xticklabels(station_labels, rotation=45, fontsize=9)
 ax1.grid(True, alpha=0.3, axis='y')
 
-# Plot 2: Nhóm dân số dễ bị tổn thương
 ax2 = axes[0, 1]
 vuln_groups = ['Trẻ em\n(0-14 tuổi)', 'Người cao tuổi\n(65+ tuổi)', 
                'Bệnh nhân\nhô hấp', 'Bệnh nhân\ntim mạch']
-vuln_deaths = [2500, 1800, 3200, 2800]  # Ví dụ số liệu
+vuln_deaths = [2500, 1800, 3200, 2800] 
 ax2.bar(range(len(vuln_groups)), vuln_deaths, color=['red', 'orange', 'darkred', 'purple'])
 ax2.set_title('Số ca tử vong dư thừa theo nhóm dễ bị tổn thương')
 ax2.set_ylabel('Ước tính số ca tử vong/năm')
 ax2.set_xticks(range(len(vuln_groups)))
 ax2.set_xticklabels(vuln_groups, rotation=0, fontsize=9)
 
-# Plot 3: Mẫu rủi ro sức khỏe theo mùa
+
 ax3 = axes[0, 2]
 monthly_pm25 = df.groupby(df['datetime'].dt.month)['PM2.5'].mean()
 month_names = ['T1','T2','T3','T4','T5','T6','T7','T8','T9','T10','T11','T12']
@@ -82,14 +80,14 @@ ax3.set_xticks(monthly_pm25.index)
 ax3.set_xticklabels([month_names[i-1] for i in monthly_pm25.index], rotation=0)
 ax3.grid(True, alpha=0.3, axis='y')
 
-# Plot 4: Phân bổ tác động kinh tế
+
 ax4 = axes[1, 0]
 econ_categories = ['Chi phí tử vong\ndư thừa', 'Chi phí\ny tế', 'Mất năng suất\nlao động']
 econ_values = [60, 25, 15]  # Phần trăm
 ax4.pie(econ_values, labels=econ_categories, autopct='%1.1f%%', startangle=90)
 ax4.set_title('Phân bổ tác động kinh tế\n(% tổng chi phí/năm)')
 
-# Plot 5: Dự báo rủi ro sức khỏe 2025
+
 ax5 = axes[1, 1]
 forecast_months = list(range(1, 13))
 forecast_pm25_values = list(forecast_2025.values())
@@ -103,7 +101,6 @@ ax5.set_xticks(forecast_months)
 ax5.set_xticklabels([month_names[i-1] for i in forecast_months], rotation=0)
 ax5.grid(True, alpha=0.3, axis='y')
 
-# Plot 6: So sánh phân bố rủi ro sức khỏe
 ax6 = axes[1, 2]
 risk_levels = ['Tốt', 'Trung bình', 'Kém', 'Nguy hại']
 historical_risk_counts = [df[df['AQI_Level'] == level].shape[0] for level in risk_levels]

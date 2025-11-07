@@ -4,11 +4,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# Đọc dữ liệu
+
 print("=== KHÁM PHÁ DỮ LIỆU ===")
 df = pd.read_csv("HealthyAir_HCMC.csv")
 
-# Thông tin cơ bản
+
 print("\n1. THÔNG TIN CƠ BẢN:")
 print(f"Số dòng: {len(df):,}")
 print(f"Số cột: {df.shape[1]}")
@@ -46,7 +46,6 @@ print(f"\n8. PHÂN BỐ THEO STATION:")
 station_counts = df['Station_No'].value_counts().sort_index()
 print(station_counts)
 
-# Kiểm tra các giá trị bất thường
 print(f"\n9. KIỂM TRA OUTLIERS (giá trị âm hoặc quá lớn):")
 numeric_cols = ['TSP', 'PM2.5', 'O3', 'CO', 'NO2', 'SO2', 'Temperature', 'Humidity']
 for col in numeric_cols:
