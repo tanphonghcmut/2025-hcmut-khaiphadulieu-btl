@@ -28,9 +28,9 @@ Dự án nghiên cứu và dự báo chất lượng không khí Thành phố H�
 
 ### Bước 1: Yêu cầu hệ thống
 ```bash
-# Kiểm tra Python version (yêu cầu Python 3.8+)
+
 python --version
-# hoặc
+
 python3 --version
 ```
 
@@ -42,37 +42,32 @@ python3 --version
 
 ### Bước 2: Clone hoặc download project
 ```bash
-# Nếu có Git
+
 git clone [repository-url]
 cd KhaiPhaDuLieu
 
-# Hoặc giải nén file zip đã tải về
+
 unzip KhaiPhaDuLieu.zip
 cd KhaiPhaDuLieu
 ```
 
 ### Bước 3: Tạo môi trường ảo (Virtual Environment)
 ```bash
-# Tạo virtual environment
+
 python -m venv myenv
 
-# Kích hoạt môi trường ảo
-# Trên macOS/Linux:
 source myenv/bin/activate
 
-# Trên Windows:
 myenv\Scripts\activate
 ```
 
 ### Bước 4: Cài đặt dependencies
 ```bash
-# Cập nhật pip
+
 pip install --upgrade pip
 
-# Cài đặt các thư viện cần thiết
 pip install pandas numpy matplotlib seaborn scikit-learn scipy statsmodels
 
-# Hoặc nếu có file requirements.txt:
 pip install -r requirements.txt
 ```
 
@@ -93,21 +88,18 @@ KhaiPhaDuLieu/
 
 ### Chạy phân tích EDA và tạo Target Variable
 ```bash
-# Đảm bảo đang trong virtual environment
-source myenv/bin/activate  # macOS/Linux
-# hoặc myenv\Scripts\activate  # Windows
 
-# Chạy file chính
+source myenv/bin/activate
+
 python eda_target_creation.py
 ```
 
 ### Kích hoạt/Tắt môi trường ảo
 ```bash
-# Kích hoạt
-source myenv/bin/activate  # macOS/Linux
-myenv\Scripts\activate     # Windows
 
-# Tắt (khi hoàn thành)
+source myenv/bin/activate
+myenv\Scripts\activate  
+
 deactivate
 ```
 
@@ -176,44 +168,39 @@ KhaiPhaDuLieu/
 
 #### 1. Python không được tìm thấy
 ```bash
-# Cài Python từ https://python.org
-# Hoặc dùng package manager:
-# macOS: brew install python
-# Ubuntu: sudo apt install python3 python3-pip
+
 ```
 
 #### 2. Pip không hoạt động
 ```bash
-# Cài pip
+
 python -m ensurepip --upgrade
 
-# Hoặc cài manual
+
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 python get-pip.py
 ```
 
 #### 3. Lỗi import thư viện
 ```bash
-# Đảm bảo virtual environment được kích hoạt
+
 source myenv/bin/activate
 
-# Cài lại packages
 pip install --force-reinstall pandas numpy matplotlib seaborn scikit-learn
 ```
 
 #### 4. File dữ liệu không tìm thấy
 ```bash
-# Kiểm tra file có trong thư mục gốc
+
 ls -la HealthyAir_HCMC.csv
 
-# Nếu không có, đảm bảo file CSV nằm cùng thư mục với .py
 ```
 
 #### 5. Biểu đồ không hiển thị
 ```bash
-# Cài backend cho matplotlib
+
 pip install PyQt5
-# hoặc
+
 pip install tkinter
 ```
 
